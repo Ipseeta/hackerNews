@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"  content="Hacker news crawler" />
+    <meta name="keywords"  content="crawler, hackernews" />
+    <title>
+        Hacker news
+    </title>
+</head>
+<body>
+    <div>
+        <%- include header.ejs %>
+        <div>
+            <ol>
+                <% newsArr.forEach(function(news,i) { %>
+                    <li><b><a href="<%= news.url %>" target="_blank"><%=news.title%></a>
+                        <%if (news.type !== 'ask' && news.domain) {%>
+                        (<a href="<%= news.url %>" target="_blank"><%= news.domain %></a>)
+                        <%}%>
+                    </b></li>
+                    <div>
+                        <%if (news.type === 'job') {%>
+                            <p><%=news.time_ago%></p>
+                        <%}else{ %>
+                            <p><%=news.points%> points by <a href='/<%=news.user%>' target="_blank"><%=news.user%></a>  <%=news.time_ago%> 
+                        <%}%>
+                        <%if (news.comments_count) {%>
+                            | <%=news.comments_count%> comments</p>
+                            <%}else{ %>
+                                | <a href='https://news.ycombinator.com/item?id=<%=news.id%>' target="_blank"> discuss</a>
+                                <%}%>
+                    </div>
+                <%});%>
+                </ol>
+        </div>
+    </div>
+</body>
+</html>
