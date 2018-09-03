@@ -13,10 +13,14 @@
 </head>
 <body>
     <div>
+            <%if (status === 200) {%>
         <p>user:	<%=user.id%></p>
         <p>created:	<%=user.id%></p>  
         <p>karma:	<%=user.karma%></p>
         <p>about:	<%=user.about%></p>
+        <%}else{%>
+            <p>No user found</p>
+            <%}%>
     </div>
 </body>
 </html>

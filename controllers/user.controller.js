@@ -11,6 +11,10 @@ exports.fetchUser = function (req, res) {
     })
         .then(res => res.json())
         .then(content => {
-            res.render('user', { user: content });
+            if(content === null){
+                res.render('user', { user: content, status: 500 });
+            }else{
+                res.render('user', { user: content, status: 200 });
+            }
         });
 }
